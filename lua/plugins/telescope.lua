@@ -29,6 +29,8 @@ return {
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      -- Command as floating window
+      'jonarrien/telescope-cmdline.nvim',
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -70,6 +72,7 @@ return {
             -- disables netrw and use telescope-file-browser in its place
             -- hijack_netrw = true,
           },
+          ['cmdline'] = {},
         },
       }
 
@@ -77,6 +80,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'file_browser')
+      pcall(require('telescope').load_extension, 'cmdline')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -91,6 +95,8 @@ return {
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
+      -- Commandline as a floating window
+      vim.keymap.set('n', ':', '<cmd>Telescope cmdline<cr>', { desc = 'Cmdline' })
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.

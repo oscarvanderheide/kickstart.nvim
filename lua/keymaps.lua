@@ -89,4 +89,11 @@ function SET_PYTHON_KEYMAPS()
   vim.keymap.set('n', '<leader>pi', IPythonOpen, { desc = 'Open IPython in terminal' })
 end
 
+function SET_JULIA_KEYMAPS()
+  vim.keymap.set('n', '{', ':IPythonCellPrevCell<CR>', { desc = 'Jump to previous cell' })
+  vim.keymap.set('n', '}', ':IPythonCellNextCell<CR>', { desc = 'Jump to next cell' })
+  vim.keymap.set('n', '<CR>', ':IPythonCellExecuteCellJump<CR>', { desc = 'Execute cell and jump to next cell' })
+  -- Keymap to open IPython in a terminal
+  vim.keymap.set('n', '<leader>pi', JuliaOpen, { desc = 'Open Julia in terminal' })
+end
 -- vim: ts=2 sts=2 sw=2 et

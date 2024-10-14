@@ -170,7 +170,7 @@ return {
         -- clangd = {},
         -- gopls = {},
         -- PYTHON STUFF
-        pyright = {}, -- python lsp
+        -- pyright = {}, -- python lsp
         ruff = {}, -- python linter
         black = {}, -- python formatter
         isort = {}, -- python import organize
@@ -219,7 +219,7 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- used to format lua code
         'julia-lsp',
-        'matlab-language-server',
+        --'matlab-language-server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
