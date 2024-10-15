@@ -1,13 +1,8 @@
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -52,7 +47,6 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.tabstop = 2
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -62,7 +56,6 @@ vim.opt.incsearch = true
 
 -- No longer highlight
 vim.opt.hlsearch = false
-
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
@@ -75,6 +68,7 @@ vim.opt.termguicolors = true
 -- Set target for slime
 vim.g.slime_target = 'neovim'
 vim.g.slime_dont_ask_defualt = 1
+
 -- Set transparant background
 vim.cmd [[
   highlight Normal guibg=none
