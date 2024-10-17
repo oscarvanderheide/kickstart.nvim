@@ -7,6 +7,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Turn off line numbers and relative numbers for terminal buffers
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = '*',
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+  end,
+})
+
 -- Set python specific options and keymaps
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'python', -- Only apply to Python files
@@ -20,15 +29,6 @@ vim.api.nvim_create_autocmd('FileType', {
     SET_JULIA_KEYMAPS()
     vim.g.ipython_cell_run_command = 'include("{filepath}")'
     vim.g.ipython_cell_cell_command = 'include_string(Main, clipboard())'
-  end,
-})
-
--- Turn off line numbers and relative numbers for terminal buffers
-vim.api.nvim_create_autocmd('TermOpen', {
-  pattern = '*',
-  callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
   end,
 })
 

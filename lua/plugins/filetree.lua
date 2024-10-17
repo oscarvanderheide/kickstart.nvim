@@ -14,8 +14,15 @@ return {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
+    default_component_configs = {
+      name = {
+        trailing_slash = false,
+        use_git_status_colors = true,
+      },
+    },
     filesystem = {
       window = {
+        position = 'float',
         mappings = {
           ['\\'] = 'close_window',
         },

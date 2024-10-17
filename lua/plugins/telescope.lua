@@ -1,12 +1,17 @@
--- NOTE: Plugins can specify dependencies.
---
--- The dependencies are proper plugin specifications as well - anything
--- you do for a plugin at the top level, you can do for a dependency.
---
--- Use the `dependencies` key to specify the dependencies of a particular plugin
+--╔════════════════════════════════════════════════════════════════════════════╗
+--║                               Telescope Plugins                            ║
+--╠════════════════════════════════════════════════════════════════════════════╣
+--║   - telescope (base plugin)                                                ║
+--║   - telescope-fzf-native                                                   ║
+--║   - telescope-ui-select                                                    ║
+--║   - telescope-cmdline                                                      ║
+--║   - telescope-file-browser                                                 ║
+--║   - telescope-smart-open                                                   ║
+--╚════════════════════════════════════════════════════════════════════════════╝
 
 return {
-  { -- Fuzzy Finder (files, lsp, etc)
+  {
+    -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
@@ -14,11 +19,9 @@ return {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
         'nvim-telescope/telescope-fzf-native.nvim',
-
         -- `build` is used to run some command when the plugin is installed/updated.
         -- This is only run then, not every time Neovim starts up.
         build = 'make',
-
         -- `cond` is a condition used to determine whether this plugin should be
         -- installed and loaded.
         cond = function()
@@ -26,7 +29,6 @@ return {
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       -- Command as floating window
@@ -51,7 +53,6 @@ return {
       -- This opens a window that shows you all of the keymaps for the current
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
-
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -81,6 +82,7 @@ return {
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'file_browser')
       pcall(require('telescope').load_extension, 'cmdline')
+      pcall(require('telescope').load_extension, 'smart-open')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -93,7 +95,7 @@ return {
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      -- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Commandline as a floating window
       vim.keymap.set('n', ':', '<cmd>Telescope cmdline<cr>', { desc = 'Cmdline' })
@@ -119,13 +121,34 @@ return {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+      -- Shortcut for smart open
+      vim.keymap.set('n', '<leader><leader>', function()
+        require('telescope').extensions.smart_open.smart_open()
+      end, { noremap = true, silent = true })
     end,
   },
+
   -- Add telescope-based file browser as well
   {
     'nvim-telescope/telescope-file-browser.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
     vim.keymap.set('n', '<space>fb', ':Telescope file_browser<CR>'),
+  },
+
+  -- Smart open
+  {
+    'danielfalk/smart-open.nvim',
+    branch = '0.2.x',
+    config = function()
+      require('telescope').load_extension 'smart_open'
+    end,
+    dependencies = {
+      'kkharji/sqlite.lua',
+      -- Only required if using match_algorithm fzf
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+      { 'nvim-telescope/telescope-fzy-native.nvim' },
+    },
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
