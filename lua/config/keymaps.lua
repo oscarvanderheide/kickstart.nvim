@@ -1,8 +1,9 @@
 -- General keymaps (i.e. not specific to a certain plugin)
 
+-- Cmd + s to save in insert mode
+vim.keymap.set('i', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -84,4 +85,5 @@ function SET_JULIA_KEYMAPS()
   -- Keymap to open IPython in a terminal
   -- vim.keymap.set('n', '<leader>pi', JuliaOpen, { desc = 'Open Julia in terminal' })
 end
+
 -- vim: ts=2 sts=2 sw=2 et

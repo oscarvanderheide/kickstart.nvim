@@ -4,30 +4,25 @@ return {
   opts = {
     default_mappings = false,
     mappings = {
-      i = {
-        j = {
-          -- These can all also be functions
-          k = '<Esc>',
-          j = '<Esc>',
-        },
+      i = { -- Keymaps to exit insert mode
+        j = { j = '<Esc>' },
       },
-      c = {
+      c = { -- Keymaps to exit command mode
         j = {
           k = '<Esc>',
-          j = '<Esc>',
         },
       },
-      t = {
+      t = { -- Keymaps to exit terminal mode
         j = {
           k = '<C-\\><C-n>',
         },
       },
-      v = {
+      v = { -- Keymaps to exit visual mode
         j = {
           k = '<Esc>',
         },
       },
-      s = {
+      s = { -- Keymaps to enter selection mode
         j = {
           k = '<Esc>',
         },

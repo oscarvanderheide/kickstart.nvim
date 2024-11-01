@@ -1,6 +1,4 @@
--- cmp
--- autocomplete
-
+-- cmp: autocomplete
 return {
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -44,6 +42,9 @@ return {
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
 
+      local has_copilot, copilot_suggestion = pcall(require, 'copilot.suggestion')
+      local cmp_select_opts = { behavior = cmp.SelectBehavior.Replace }
+      local has_luasnip, luasnip = pcall(require, 'luasnip')
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -73,10 +74,29 @@ return {
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          ['<CR>'] = cmp.mapping.confirm { select = true },
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          -- ['<CR>'] = cmp.mapping.confirm { select = true },
+          -- ['<Tab>'] = cmp.mapping.select_next_item(),
+          -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          --
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            local col = vim.fn.col '.' - 1
 
+            if has_copilot and copilot_suggestion.is_visible() then
+              copilot_suggestion.accept()
+            elseif cmp.visible() then
+              -- cmp.select_next_item(cmp_select_opts)
+              cmp.mapping.confirm {
+                select = true,
+              }
+            elseif has_luasnip and luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' then
+              fallback()
+            else
+              -- cmp.complete()
+              cmp.mapping.confirm { select = true }
+            end
+          end, { 'i', 's' }),
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.

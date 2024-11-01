@@ -1,9 +1,5 @@
---╔════════════════════════════════════════════════════════════════════════════╗
---║                               Syntax Highlighting Plugins                  ║
---╠════════════════════════════════════════════════════════════════════════════╣
---║   - treesitter                                                             ║
---╚════════════════════════════════════════════════════════════════════════════╝
---
+-- treesitter
+
 return {
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -29,6 +25,7 @@ return {
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
+        disable = { 'julia' }, -- Disable Tree-sitter for Julia
         enable = true,
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to

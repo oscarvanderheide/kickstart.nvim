@@ -1,6 +1,5 @@
--- autopairs
--- https://github.com/windwp/nvim-autopairs
--- automatically adds closing ),] or }
+-- autopairs: automatically adds closing ),] or }
+
 return {
   'windwp/nvim-autopairs',
   event = 'InsertEnter',

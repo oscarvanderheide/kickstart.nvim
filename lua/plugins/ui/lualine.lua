@@ -1,4 +1,4 @@
--- ~/nvim/lua/slydragonn/plugins/lualine.lua
+-- lualine: nicer status backward
 
 return {
   'nvim-lualine/lualine.nvim',
@@ -24,12 +24,12 @@ return {
         },
       },
       sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
-        lualine_x = {}, -- { 'filetype' },
-        lualine_y = {}, -- { 'progress' },
-        lualine_z = {}, --{ 'location' },
+        lualine_x = { 'mode' },
+        lualine_y = { 'branch', 'diff', 'diagnostics' },
+        lualine_z = { 'filename' },
+        -- lualine_x = {}, -- { 'filetype' },
+        -- lualine_y = {}, -- { 'progress' },
+        -- lualine_z = {}, --{ 'location' },
       },
       inactive_sections = {
         lualine_a = {},

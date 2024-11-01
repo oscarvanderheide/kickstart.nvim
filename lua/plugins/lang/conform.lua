@@ -1,11 +1,6 @@
--- conform
--- autoformatter
+-- conform: autoformatter
 
 return {
-  {
-    -- Automatically set tabstops and indents
-    'tpope/vim-sleuth',
-  },
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },

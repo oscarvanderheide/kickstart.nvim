@@ -1,3 +1,5 @@
+-- notebook-navigator: quickly jump between and execute code cells
+
 return {
   {
     'GCBallesteros/NotebookNavigator.nvim',
