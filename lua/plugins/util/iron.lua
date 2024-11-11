@@ -24,7 +24,7 @@ return {
     config = {
       -- This defines how the repl is opened. Here, we set the REPL window
       -- to open in a horizontal split to the bottom, with a height of 10.
-      repl_open_cmd = 'vertical bot 20 split',
+      repl_open_cmd = 'vertical bot 120 split',
 
       -- This defines which binary to use for the REPL. If `ipython` is
       -- available, it will use `ipython`, otherwise it will use `python3`.
@@ -38,6 +38,9 @@ return {
             local binary = ipythonAvailable and 'ipython' or 'python3'
             return { binary }
           end,
+        },
+        julia = {
+          command = { 'julia', '--project=.' },
         },
       },
     },

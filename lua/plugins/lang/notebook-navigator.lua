@@ -5,13 +5,13 @@ return {
     'GCBallesteros/NotebookNavigator.nvim',
     keys = {
       {
-        ']h',
+        'D-j',
         function()
           require('notebook-navigator').move_cell 'd'
         end,
       },
       {
-        '[h',
+        'D-k',
         function()
           require('notebook-navigator').move_cell 'u'
         end,

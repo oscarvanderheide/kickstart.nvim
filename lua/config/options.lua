@@ -22,7 +22,7 @@ vim.opt.splitbelow = true -- Horizontal splits open below
 vim.opt.inccommand = 'split' -- Preview substitutions live
 vim.opt.incsearch = true -- Incremental search
 vim.opt.hlsearch = true -- No highlighting after search
-vim.opt.cursorline = true -- Highlight current line
+-- vim.opt.cursorline = true -- Highlight current line
 vim.opt.scrolloff = 16 -- Keep lines above and below the cursor
 vim.opt.termguicolors = true -- Enable more colors
 vim.opt.cmdheight = 0 -- Hide the command line
@@ -32,7 +32,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
-vim.opt.colorcolumn = '80,120'
+-- vim.opt.colorcolumn = '80,120'
 
 -- Set transparent background
 vim.cmd [[

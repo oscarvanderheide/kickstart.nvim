@@ -1,7 +1,10 @@
 -- General keymaps (i.e. not specific to a certain plugin)
 
--- Cmd + s to save in insert mode
+-- Cmd + s to save
 vim.keymap.set('i', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
+vim.keymap.set('n', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
+-- Select entire file
+vim.keymap.set('n', '<D-a>', 'ggVG', { noremap = true, silent = true, desc = 'Select entire file' })
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
@@ -79,11 +82,14 @@ function SET_PYTHON_KEYMAPS()
 end
 
 function SET_JULIA_KEYMAPS()
-  -- vim.keymap.set('n', '{', ':IPythonCellPrevCell<CR>', { desc = 'Jump to previous cell' })
-  -- vim.keymap.set('n', '}', ':IPythonCellNextCell<CR>', { desc = 'Jump to next cell' })
-  -- vim.keymap.set('n', '<CR>', ':IPythonCellExecuteCellJump<CR>', { desc = 'Execute cell and jump to next cell' })
-  -- Keymap to open IPython in a terminal
-  -- vim.keymap.set('n', '<leader>pi', JuliaOpen, { desc = 'Open Julia in terminal' })
+  -- Switch between editor and REPL
+  vim.keymap.set('n', '<leader>k', '<C-w><C-l>i', { desc = 'Switch to REPL' })
+  vim.keymap.set('t', '<leader>j', [[<C-\><C-n><C-w>h]], { desc = 'Switch to editor' })
+  -- Copy the block move behavior from vim-julia and map to <D-j> and <D-k>
+  -- vim.keymap.set('n', '<D-j>', ':<C-U>let b:jlblk_count=v:count1 | call julia_blocks#moveblock_n()<CR>', { desc = 'Move to next Julia block', silent = true })
+  -- vim.keymap.set('n', '<D-J>', ':<C-U>let b:jlblk_count=v:count1 | call julia_blocks#moveblock_p()<CR>', { desc = 'Move to next Julia block', silent = true })
+  -- vim.keymap.set('n', '<C-j>', ':call julia_blocks#moveblock_n()', { desc = 'Jump to next Julia block' })
+  -- vim.keymap.set('n', '<C-k>', ':call julia_blocks#moveblock_p()', { desc = 'Jump to previous Julia block' })
 end
 
 -- vim: ts=2 sts=2 sw=2 et

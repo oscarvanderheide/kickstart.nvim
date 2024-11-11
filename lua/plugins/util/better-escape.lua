@@ -4,6 +4,10 @@ return {
   opts = {
     default_mappings = false,
     mappings = {
+      -- n = {
+      --   -- Use kj to enter Julia block movement mode
+      --   k = { j = 'kj' },
+      -- },
       i = { -- Keymaps to exit insert mode
         j = { j = '<Esc>' },
       },

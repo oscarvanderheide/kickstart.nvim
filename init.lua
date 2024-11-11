@@ -3,4 +3,4 @@ require 'config.keymaps'
 require 'config.autocommands'
 require 'config.lazy'
 -- Does julia-vim work without this?
--- vim.cmd 'runtime macros/matchit.vim'
+vim.cmd 'runtime macros/matchit.vim'
