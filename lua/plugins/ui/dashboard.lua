@@ -1,3 +1,5 @@
+-- dashboard: startup screen 
+
 return {
   'nvimdev/dashboard-nvim',
   event = 'VimEnter',

@@ -1,48 +1,60 @@
 return {
   'Vigemus/iron.nvim',
   keys = {
-    { '<leader>i', vim.cmd.IronRepl, desc = '󱠤 Toggle REPL' },
+    { '<leader>i', vim.cmd.IronRepl, desc = '󱠤 Open REPL' },
     { '<leader>I', vim.cmd.IronRestart, desc = '󱠤 Restart REPL' },
-
-    -- these keymaps need no right-hand-side, since that is defined by the
-    -- plugin config further below
     { '+', mode = { 'n', 'x' }, desc = '󱠤 Send-to-REPL Operator' },
-    { '++', desc = '󱠤 Send Line to REPL' },
+    -- { '++', desc = '󱠤 Send Line to REPL' },
   },
 
-  -- since irons's setup call is `require("iron.core").setup`, instead of
-  -- `require("iron").setup` like other plugins would do, we need to tell
-  -- lazy.nvim which module to via the `main` key
-  main = 'iron.core',
+  -- main = 'iron.core',
+  -- opts = {
+  --   keymaps = {
+  --     send_line = '++',
+  --     visual_send = '+',
+  --     send_motion = '+',
+  --   },
+  --
+  -- },
 
-  opts = {
-    keymaps = {
-      send_line = '++',
-      visual_send = '+',
-      send_motion = '+',
-    },
-    config = {
-      -- This defines how the repl is opened. Here, we set the REPL window
-      -- to open in a horizontal split to the bottom, with a height of 10.
-      repl_open_cmd = 'vertical bot 120 split',
+  config = function()
+    local iron = require 'iron.core'
+    local view = require 'iron.view'
 
-      -- This defines which binary to use for the REPL. If `ipython` is
-      -- available, it will use `ipython`, otherwise it will use `python3`.
-      -- since the python repl does not play well with indents, it's
-      -- preferable to use `ipython` or `bypython` here.
-      -- (see: https://github.com/Vigemus/iron.nvim/issues/348)
-      repl_definition = {
-        python = {
-          command = function()
-            local ipythonAvailable = vim.fn.executable 'ipython' == 1
-            local binary = ipythonAvailable and 'ipython' or 'python3'
-            return { binary }
-          end,
-        },
-        julia = {
-          command = { 'julia', '--project=.' },
+    -- Set up Iron with specific configurations
+    iron.setup {
+      config = {
+        scratch_repl = true, -- Allow creating a scratch REPL
+        repl_open_cmd = view.split.vertical.botright(0.5),
+        repl_definition = {
+          python = {
+            command = function()
+              local ipythonAvailable = vim.fn.executable 'ipython' == 1
+              local binary = ipythonAvailable and 'ipython' or 'python3'
+              return { binary }
+            end,
+          },
+          julia = {
+            command = { 'julia', '--project=.' },
+          },
         },
       },
-    },
-  },
+      keymaps = {
+        send_motion = '+',
+        visual_send = '+',
+        -- send_file = '<space>sf',
+        send_line = '++',
+        -- send_paragraph = 'M',
+        -- send_until_cursor = '<space>su',
+        -- send_mark = '<space>sm',
+        -- mark_motion = '<space>mc',
+        -- mark_visual = '<space>mc',
+        -- remove_mark = '<space>md',
+        -- cr = '<space>s<cr>',
+        -- interrupt = '<space>s<space>',
+        -- exit = '<space>sq',
+        -- clear = '<space>cl',
+      },
+    }
+  end,
 }

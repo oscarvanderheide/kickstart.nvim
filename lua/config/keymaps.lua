@@ -1,29 +1,59 @@
 -- General keymaps (i.e. not specific to a certain plugin)
 
+-- Shortcut for replacing a word
+vim.keymap.set('n', '<C-c>', 'ciw', { noremap = true, silent = true, desc = 'Change inner word' })
+
 -- Cmd + s to save
 vim.keymap.set('i', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 vim.keymap.set('n', '<D-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
+
 -- Select entire file
 vim.keymap.set('n', '<D-a>', 'ggVG', { noremap = true, silent = true, desc = 'Select entire file' })
--- Clear highlights on search when pressing <Esc> in normal mode
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with <Esc><Esc>
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- Remap `U` to redo (equivalent to `<C-r>`)
+vim.keymap.set('n', 'U', '<C-r>', { noremap = true, silent = true })
+-- Remap `J` to jump to the previous paragraph/"_yiw
+vim.keymap.set('n', 'J', '}', { noremap = true, silent = true })
+-- Remap `K` to jump to the next paragraph/block
+vim.keymap.set('n', 'K', '{', { noremap = true, silent = true })
+-- Remap `H` to move to the start of the line
+vim.keymap.set('n', 'H', '^', { noremap = true, silent = true })
+-- Remap `L` to move to the end of the line
+vim.keymap.set('n', 'L', '$', { noremap = true, silent = true })
+-- Remap `<Tab>` to switch to the next buffer
+vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
+-- Remap `<S-Tab>` to switch to the previous buffer
+vim.keymap.set('n', '<S-Tab>', ':bprev<CR>', { noremap = true, silent = true })
+
+-- Remap `<C-x>` to delete the current buffer
+vim.keymap.set('n', '<C-x>', ':bd<CR>', { noremap = true, silent = true })
+-- Remap `d` to use the black hole register
+vim.keymap.set('n', 'd', '"_d')
+vim.keymap.set('n', 'D', '"_D')
+vim.keymap.set('x', 'd', '"_d')
+
 -- Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+vim.keymap.set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Modify half-page up and down to center the screen
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Half page down and center' })
@@ -40,56 +70,27 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- Start new session using tmux-sessionizer (from primeagen)
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer.sh<CR>')
 
+-- Send paragraph to REPL and move to next
+vim.keymap.set('n', 'M', function()
+  -- Send the current paragraph to the REPL using Iron's send_paragraph method
+  local iron = require 'iron.core'
+  iron.send_paragraph()
+  -- Move to the start of the next paragraph
+  vim.cmd 'normal! }'
+end, { desc = 'Send paragraph to REPL and move to start of next paragraph' })
+
 -- Python-specific keymaps. They are enabled through an autocommand
 function SET_PYTHON_KEYMAPS()
-  --   -- IPython-cell configuration in Lua
-  --   -- Map <leader>s to start IPython
-  --   vim.keymap.set('n', '<leader>ps', ':SlimeSend1 ipython --matplotlib<CR>', { desc = 'Start IPython' })
-  --   -- Map <leader>r to run the script
-  --   vim.keymap.set('n', '<leader>pr', ':IPythonCellRun<CR>', { desc = 'Run script' })
-  --   -- Map <leader>R to run the script and time the execution
-  --   vim.keymap.set('n', '<leader>pR', ':IPythonCellRunTime<CR>', { desc = 'Run script with timing' })
-  --   -- Map <leader>c to execute the current cell
-  --   vim.keymap.set('n', '<leader>pc', ':IPythonCellExecuteCell<CR>', { desc = 'Execute current cell' })
-  --   -- Map <leader>C to execute the current cell and jump to the next cell
-  --   vim.keymap.set('n', '<leader>pC', ':IPythonCellExecuteCellJump<CR>', { desc = 'Execute cell and jump to next' })
-  --   -- Map <leader>l to clear IPython screen
-  --   vim.keymap.set('n', '<leader>pl', ':IPythonCellClear<CR>', { desc = 'Clear IPython screen' })
-  --   -- Map <leader>x to close all Matplotlib figure windows
-  --   vim.keymap.set('n', '<leader>px', ':IPythonCellClose<CR>', { desc = 'Close all Matplotlib figures' })
-  --   -- Map <leader>h to send the current line or current selection to IPython
-  --   vim.keymap.set('n', '<leader>ph', '<Plug>SlimeLineSend', { desc = 'Send line to IPython' })
-  --   vim.keymap.set('x', '<leader>ph', '<Plug>SlimeRegionSend', { desc = 'Send selection to IPython' })
-  --   -- Map <leader>p to run the previous command
-  --   vim.keymap.set('n', '<leader>pp', ':IPythonCellPrevCommand<CR>', { desc = 'Run previous command' })
-  --   -- Map <leader>q to restart IPython
-  --   vim.keymap.set('n', '<leader>pQ', ':IPythonCellRestart<CR>', { desc = 'Restart IPython' })
-  --   -- Map <leader>d to start debug mode
-  --   vim.keymap.set('n', '<leader>pd', ':SlimeSend1 %debug<CR>', { desc = 'Start debug mode' })
-  --   -- Map <leader>q to exit debug mode or IPython
-  --   vim.keymap.set('n', '<leader>pq', ':SlimeSend1 exit<CR>', { desc = 'Exit debug mode/IPython' })
-  --   -- Map <F9> and <F10> to insert a cell header tag above/below and enter insert mode
-  --   vim.keymap.set('n', '<F9>', ':IPythonCellInsertAbove<CR>a', { desc = 'Insert cell above' })
-  --   vim.keymap.set('n', '<F10>', ':IPythonCellInsertBelow<CR>a', { desc = 'Insert cell below' })
-  --   vim.keymap.set('i', '<F9>', '<C-o>:IPythonCellInsertAbove<CR>', { desc = 'Insert cell above (insert mode)' })
-  --   vim.keymap.set('i', '<F10>', '<C-o>:IPythonCellInsertBelow<CR>', { desc = 'Insert cell below (insert mode)' })
-  --
-  --   -- vim.keymap.set('n', '{', ':IPythonCellPrevCell<CR>', { desc = 'Jump to previous cell' })
-  --   -- vim.keymap.set('n', '}', ':IPythonCellNextCell<CR>', { desc = 'Jump to next cell' })
-  --   vim.keymap.set('n', '<CR>', ':IPythonCellExecuteCellJump<CR>', { desc = 'Execute cell and jump to next cell' })
-  --   -- Keymap to open IPython in a terminal
-  --   vim.keymap.set('n', '<leader>pi', IPythonOpen, { desc = 'Open IPython in terminal' })
+  -- vim.keymap.set('n', 'M', '+}}', { desc = 'Send paragraph to REPL and move to start of next paragraph' })
 end
 
 function SET_JULIA_KEYMAPS()
   -- Switch between editor and REPL
-  vim.keymap.set('n', '<leader>k', '<C-w><C-l>i', { desc = 'Switch to REPL' })
-  vim.keymap.set('t', '<leader>j', [[<C-\><C-n><C-w>h]], { desc = 'Switch to editor' })
+  -- vim.keymap.set('n', '<leader>k', '<C-w><C-l>i', { desc = 'Switch to REPL' })
+  -- vim.keymap.set('t', '<leader>j', [[<C-\><C-n><C-w>h]], { desc = 'Switch to editor' })
   -- Copy the block move behavior from vim-julia and map to <D-j> and <D-k>
   -- vim.keymap.set('n', '<D-j>', ':<C-U>let b:jlblk_count=v:count1 | call julia_blocks#moveblock_n()<CR>', { desc = 'Move to next Julia block', silent = true })
   -- vim.keymap.set('n', '<D-J>', ':<C-U>let b:jlblk_count=v:count1 | call julia_blocks#moveblock_p()<CR>', { desc = 'Move to next Julia block', silent = true })
   -- vim.keymap.set('n', '<C-j>', ':call julia_blocks#moveblock_n()', { desc = 'Jump to next Julia block' })
   -- vim.keymap.set('n', '<C-k>', ':call julia_blocks#moveblock_p()', { desc = 'Jump to previous Julia block' })
 end
-
--- vim: ts=2 sts=2 sw=2 et
