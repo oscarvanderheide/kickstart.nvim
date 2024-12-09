@@ -26,10 +26,10 @@ vim.keymap.set('n', 'K', '{', { noremap = true, silent = true })
 vim.keymap.set('n', 'H', '^', { noremap = true, silent = true })
 -- Remap `L` to move to the end of the line
 vim.keymap.set('n', 'L', '$', { noremap = true, silent = true })
--- Remap `<Tab>` to switch to the next buffer
-vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
--- Remap `<S-Tab>` to switch to the previous buffer
-vim.keymap.set('n', '<S-Tab>', ':bprev<CR>', { noremap = true, silent = true })
+-- -- Remap `<Tab>` to switch to the next buffer
+-- vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
+-- -- Remap `<S-Tab>` to switch to the previous buffer
+-- vim.keymap.set('n', '<S-Tab>', ':bprev<CR>', { noremap = true, silent = true })
 
 -- Remap `<C-x>` to delete the current buffer
 vim.keymap.set('n', '<C-x>', ':bd<CR>', { noremap = true, silent = true })
@@ -70,6 +70,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- Start new session using tmux-sessionizer (from primeagen)
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer.sh<CR>')
 
+-- REPL keymaps:
+
 -- Send paragraph to REPL and move to next
 vim.keymap.set('n', 'M', function()
   -- Send the current paragraph to the REPL using Iron's send_paragraph method
@@ -78,6 +80,15 @@ vim.keymap.set('n', 'M', function()
   -- Move to the start of the next paragraph
   vim.cmd 'normal! }'
 end, { desc = 'Send paragraph to REPL and move to start of next paragraph' })
+
+-- Switch to REPL and start insert mode
+vim.keymap.set('n', '<Tab>', function()
+  vim.cmd 'redraw!'
+  vim.cmd 'wincmd l' -- Move to the right-hand split (REPL)
+  vim.cmd 'startinsert' -- Enter terminal insert mode
+end, { noremap = true, silent = true })
+-- Switch from REPL back to editor
+vim.keymap.set('t', '<Tab>', [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
 
 -- Python-specific keymaps. They are enabled through an autocommand
 function SET_PYTHON_KEYMAPS()
