@@ -25,7 +25,8 @@ return {
     iron.setup {
       config = {
         scratch_repl = true, -- Allow creating a scratch REPL
-        repl_open_cmd = view.split.vertical.botright(0.5),
+        repl_open_cmd = view.split.vertical.botright(0.45),
+
         repl_definition = {
           python = {
             format = require('iron.fts.common').bracketed_paste_python,
