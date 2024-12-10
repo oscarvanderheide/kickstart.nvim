@@ -70,6 +70,9 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- Start new session using tmux-sessionizer (from primeagen)
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer.sh<CR>')
 
+-- Alternate between last two buffers
+vim.api.nvim_set_keymap('n', ',', '<C-^>', { noremap = true, silent = true })
+
 -- REPL keymaps:
 
 -- Send paragraph to REPL and move to next
@@ -87,6 +90,7 @@ vim.keymap.set('n', '<C-l>', function()
   vim.cmd 'wincmd l' -- Move to the right-hand split (REPL)
   vim.cmd 'startinsert' -- Enter terminal insert mode
 end, { noremap = true, silent = true })
+
 -- Switch from REPL back to editor
 vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
 
@@ -106,32 +110,6 @@ function SET_JULIA_KEYMAPS()
   -- vim.keymap.set('n', '<C-k>', ':call julia_blocks#moveblock_p()', { desc = 'Jump to previous Julia block' })
 end
 
--- Toggle terminal with Alt-t
--- vim.keymap.set(
---   'n',
---   '<leader>tt',
---   '<cmd>ToggleTerm direction=float float_opts={width=0.5, height=0.5}<CR><cmd>startinsert<CR>',
---   { noremap = true, silent = true, desc = 'Toggle floating terminal and enter insert mode' }
--- )
-
--- local toggleterm = require('toggleterm.terminal').Terminal
-
--- vim.keymap.set('n', '<leader>tt', function()
-vim.keymap.set('n', '<C-\\>', function()
-  local toggleterm = require('toggleterm.terminal').Terminal
-
-  local float_term = toggleterm:new {
-    direction = 'float',
-    float_opts = {
-      width = 120,
-      height = 50,
-    },
-  }
-  float_term:toggle()
-end, { noremap = true, silent = true, desc = 'Toggle floating terminal' })
-
-vim.keymap.set('t', '<C-\\>', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true, desc = 'Close floating terminal' })
--- vim.keymap.set('t', '<leader>tt', '<cmd>ToggleTerm<CR>', { noremap = true, silent = true, desc = 'Close floating terminal' })
-
 -- Toggle Copilot Chat with Alt-c
 vim.keymap.set('n', '|', '<cmd>CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' })
+vim.keymap.set('v', '|', '<cmd>CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' })
