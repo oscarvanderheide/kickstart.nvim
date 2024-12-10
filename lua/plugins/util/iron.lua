@@ -28,17 +28,16 @@ return {
         repl_open_cmd = view.split.vertical.botright(0.5),
         repl_definition = {
           python = {
-            command = function()
-              local ipythonAvailable = vim.fn.executable 'ipython' == 1
-              local binary = ipythonAvailable and 'ipython' or 'python3'
-              return { binary }
-            end,
+            format = require('iron.fts.common').bracketed_paste_python,
+            command = { 'ipython', '--no-autoindent' },
           },
           julia = {
             command = { 'julia', '--project=.' },
           },
         },
       },
+
+      ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
       keymaps = {
         send_motion = '+',
         visual_send = '+',
