@@ -10,7 +10,7 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    { '|', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
     default_component_configs = {
@@ -23,7 +23,7 @@ return {
       window = {
         position = 'float',
         mappings = {
-          ['\\'] = 'close_window',
+          ['|'] = 'close_window',
         },
       },
     },

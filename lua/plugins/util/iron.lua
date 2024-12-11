@@ -29,7 +29,7 @@ return {
 
         repl_definition = {
           python = {
-            format = require('iron.fts.common').bracketed_paste_python,
+            format = require('iron.fts.common').bracketed_paste,
             command = { 'ipython', '--no-autoindent' },
           },
           julia = {
