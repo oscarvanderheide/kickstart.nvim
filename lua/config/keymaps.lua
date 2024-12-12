@@ -12,8 +12,8 @@ vim.keymap.set('n', '<D-a>', 'ggVG', { noremap = true, silent = true, desc = 'Se
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 -- Exit terminal mode in the builtin terminal with <Esc><Esc>
+
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Remap `U` to redo (equivalent to `<C-r>`)
@@ -75,70 +75,71 @@ vim.api.nvim_set_keymap('n', ',', '<C-^>', { noremap = true, silent = true })
 
 -- REPL keymaps:
 
--- Define the function that sends the current paragraph to the REPL and moves to the start of the next paragraph
-local function send_paragraph_to_repl()
+-- Send paragraph to REPL and move to next
+vim.keymap.set('n', '<C-n>', function()
+  -- Send the current paragraph to the REPL using Iron's send_paragraph method
   local iron = require 'iron.core'
   iron.send_paragraph()
   vim.cmd 'normal! }'
-end
+end)
 
--- Map <C-n> in normal mode
-vim.keymap.set('n', '<C-n>', send_paragraph_to_repl, { desc = 'Send paragraph to REPL and move to start of next paragraph' })
+-- -- Map <C-n> in normal mode
+-- vim.keymap.set('n', '<C-n>', send_paragraph_to_repl, { desc = 'Send paragraph to REPL and move to start of next paragraph' })
 
--- Map <C-n> in insert mode
-vim.keymap.set('i', '<C-n>', function()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
-  send_paragraph_to_repl()
-end, { desc = 'Send paragraph to REPL and move to start of next paragraph' })
+-- -- Map <C-n> in insert mode
+-- vim.keymap.set('i', '<C-n>', function()
+--   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+--   send_paragraph_to_repl()
+-- end, { desc = 'Send paragraph to REPL and move to start of next paragraph' })
 
-vim.keymap.set('n', '<C-n>', function()
-  local ts_utils = require 'nvim-treesitter.ts_utils'
-  local iron = require 'iron.core'
-  local bufnr = vim.api.nvim_get_current_buf()
-  local cursor_node = ts_utils.get_node_at_cursor()
-  local root = ts_utils.get_root_for_node(cursor_node)
+-- vim.keymap.set('n', '<C-n>', function()
+--   local ts_utils = require 'nvim-treesitter.ts_utils'
+--   local iron = require 'iron.core'
+--   local bufnr = vim.api.nvim_get_current_buf()
+--   local cursor_node = ts_utils.get_node_at_cursor()
+--   local root = ts_utils.get_root_for_node(cursor_node)
 
-  if not cursor_node or not root then
-    -- Fallback to paragraph selection and sending to REPL
-    iron.send_paragraph()
-    return
-  end
+--   if not cursor_node or not root then
+--     -- Fallback to paragraph selection and sending to REPL
+--     iron.send_paragraph()
+--     return
+--   end
 
-  -- Find the nearest function or class
-  local function_node = nil
-  local class_node = nil
+-- Find the nearest function or class
+--   local function_node = nil
+--   local class_node = nil
 
-  while cursor_node do
-    local node_type = cursor_node:type()
-    if node_type == 'function_definition' or node_type == 'function_declaration' then
-      function_node = cursor_node
-    elseif node_type == 'class_definition' then
-      class_node = cursor_node
-    end
-    cursor_node = cursor_node:parent()
-  end
+--   while cursor_node do
+--     local node_type = cursor_node:type()
+--     if node_type == 'function_definition' or node_type == 'function_declaration' then
+--       function_node = cursor_node
+--     elseif node_type == 'class_definition' then
+--       class_node = cursor_node
+--     end
+--     cursor_node = cursor_node:parent()
+--   end
 
-  -- Prioritize selecting the class if available
-  local target_node = class_node or function_node
+--   -- Prioritize selecting the class if available
+--   local target_node = class_node or function_node
 
-  if target_node then
-    -- Get the start and end positions of the target node
-    local start_row, start_col, end_row, end_col = target_node:range()
+--   if target_node then
+--     -- Get the start and end positions of the target node
+--     local start_row, start_col, end_row, end_col = target_node:range()
 
-    -- Set the visual selection
-    vim.api.nvim_buf_set_mark(bufnr, '<', start_row + 1, start_col, {})
-    vim.api.nvim_buf_set_mark(bufnr, '>', end_row + 1, end_col, {})
-    vim.cmd 'normal! gv'
+--     -- Set the visual selection
+--     vim.api.nvim_buf_set_mark(bufnr, '<', start_row + 1, start_col, {})
+--     vim.api.nvim_buf_set_mark(bufnr, '>', end_row + 1, end_col, {})
+--     vim.cmd 'normal! gv'
 
-    -- Send the selected text to the REPL
-    -- vim.cmd 'normal! "+y' -- Yank the selection
-    -- iron.send(nil, vim.fn.getreg '"') -- Send the yanked text
-  else
-    -- Fallback to paragraph selection and sending to REPL
-    iron.send_paragraph()
-  end
-end, { noremap = true, silent = true })
---
+--     -- Send the selected text to the REPL
+--     -- vim.cmd 'normal! "+y' -- Yank the selection
+--     -- iron.send(nil, vim.fn.getreg '"') -- Send the yanked text
+--   else
+--     -- Fallback to paragraph selection and sending to REPL
+--     iron.send_paragraph()
+--   end
+-- end, { noremap = true, silent = true })
+-- --
 -- -- Send paragraph to REPL and move to next
 -- vim.keymap.set('n', '<C-n>', function()
 --   -- Send the current paragraph to the REPL using Iron's send_paragraph method

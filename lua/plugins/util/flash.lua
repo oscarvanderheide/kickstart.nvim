@@ -9,6 +9,16 @@ return {
         jump_labels = true, -- jump to labels starting with the typed character
       },
     },
+
+    -- Smooth jumping using cinnamon
+    action = function(match, state)
+      local cinnamon = require 'cinnamon'
+      local jump = require 'flash.jump'
+      cinnamon.scroll(function()
+        jump.jump(match, state)
+        jump.on_jump(state)
+      end)
+    end,
   },
   -- stylua: ignore
   keys = {
