@@ -4,3 +4,4 @@ require 'config.autocommands'
 require 'config.lazy'
 -- Does julia-vim work without this?
 vim.cmd 'runtime macros/matchit.vim'
+vim.cmd 'highlight Normal ctermbg=none guibg=none' -- Transparent background
