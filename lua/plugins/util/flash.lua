@@ -1,4 +1,5 @@
--- Quickly navigate within buffer using s
+-- flash: navigate to any position on the screen with few keystrokes
+
 return {
   'folke/flash.nvim',
   event = 'VeryLazy',
@@ -6,19 +7,10 @@ return {
   opts = {
     modes = {
       char = {
-        jump_labels = true, -- jump to labels starting with the typed character
+        -- Disable char mode because I don't like how it affects f,F,t,T
+        enabled = false,
       },
     },
-
-    -- Smooth jumping using cinnamon
-    action = function(match, state)
-      local cinnamon = require 'cinnamon'
-      local jump = require 'flash.jump'
-      cinnamon.scroll(function()
-        jump.jump(match, state)
-        jump.on_jump(state)
-      end)
-    end,
   },
   -- stylua: ignore
   keys = {
