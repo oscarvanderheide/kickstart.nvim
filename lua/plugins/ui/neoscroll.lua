@@ -1,22 +1,15 @@
+-- Cinnamon: smooth scrolling
+-- Smear: smooth cursor movement
 return {
   'declancm/cinnamon.nvim',
-  version = '*', -- use latest release
   opts = {
-    -- change default options here
-    disabled = false,
     keymaps = {
-      basic = true,
-      extra = false,
+      basic = true, -- enables a smooth scrolling for a few movements
+      extra = false, -- additional movements, I think it's a bit too much
     },
   },
+  {
+    'sphamba/smear-cursor.nvim',
+    opts = {},
+  },
 }
--- -- neoscroll: smooth scrolling
---
--- return {
---   'karb94/neoscroll.nvim',
---   config = function()
---     require('neoscroll').setup {
---       -- easing = 'sine',
---     }
---   end,
--- }
