@@ -32,12 +32,5 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
--- vim.opt.colorcolumn = '80,120'
 
--- Set transparent background
--- vim.cmd [[
---   highlight Normal guibg=none
---   highlight NonText guibg=none
---   highlight Normal ctermbg=none
---   highlight NonText ctermbg=none
--- ]]
+-- vim.opt.colorcolumn = '80,120'
