@@ -6,7 +6,21 @@ return {
     -- config = function()
     --   require('copilot').setup {}
     -- end,
-    opts = { suggestion = { auto_trigger = true } },
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept = '<Tab>',
+          accept_word = '<Right>',
+          accept_line = false,
+          next = '<Down>',
+          prev = '<Up>',
+          dismiss = '<Left>',
+        },
+      },
+      panel = { enabled = false },
+    },
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
@@ -20,11 +34,11 @@ return {
         layout = 'float',
       },
       panel = {
-        enabled = true,
+        enabled = false,
         auto_refresh = true,
       },
       suggestion = {
-        enabled = true,
+        enabled = false,
         -- use the built-in keymapping for "accept" (<M-l>)
         auto_trigger = true,
         accept = false, -- disable built-in keymapping

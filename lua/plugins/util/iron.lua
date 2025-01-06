@@ -1,3 +1,4 @@
+--
 return {
   'Vigemus/iron.nvim',
   keys = {
@@ -45,7 +46,7 @@ return {
         -- send_file = '<space>sf',
         send_line = '++',
         -- send_paragraph = 'M',
-        -- send_until_cursor = '<space>su',
+        send_until_cursor = '<space>su',
         -- send_mark = '<space>sm',
         -- mark_motion = '<space>mc',
         -- mark_visual = '<space>mc',
