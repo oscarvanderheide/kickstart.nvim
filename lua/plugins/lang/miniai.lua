@@ -2,6 +2,14 @@ return {
   {
     'echasnovski/mini.ai',
     event = 'VeryLazy', -- Load only when needed
+    dependencies = { 'GCBallesteros/NotebookNavigator.nvim' },
+    opts = function()
+      -- Enable things like vih to select code cells
+      local nn = require 'notebook-navigator'
+      local opts = { custom_textobjects = { h = nn.miniai_spec } }
+
+      return opts
+    end,
     config = function()
       local queries = require 'nvim-treesitter.query'
 

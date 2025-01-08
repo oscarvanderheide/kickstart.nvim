@@ -1,6 +1,6 @@
--- neo-tree: browse the file system
-
 return {
+
+  -- Neo-tree: File tree
   'nvim-neo-tree/neo-tree.nvim',
   version = '*',
   dependencies = {

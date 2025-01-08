@@ -1,6 +1,6 @@
--- toggleterm: quickly open and manage terminals
 return {
-  -- amongst your other plugins
+
+  -- Toggleterm: Quickly open and manage terminals
   {
     'akinsho/toggleterm.nvim',
     version = '*',
@@ -23,12 +23,14 @@ return {
         end,
       }
 
+      -- Helper function to toggle the terminal
       function _floating_term_toggle()
         floating_term:toggle()
       end
 
-      vim.api.nvim_set_keymap('n', '<C-\\>', '<cmd>lua _floating_term_toggle()<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('t', '<C-\\>', '<cmd>lua _floating_term_toggle()<CR>', { noremap = true, silent = true })
+      -- Use Ctrl-\ to toggle the terminal
+      vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>lua _floating_term_toggle()<CR>', { noremap = true, silent = true, desc = '[T]erminal' })
+      vim.api.nvim_set_keymap('t', '<leader>t', '<cmd>lua _floating_term_toggle()<CR>', { noremap = true, silent = true, desc = '[T]erminal' }) -- vim.keymap.set('n', '<leader>t', '<cmd>stop<CR>', { desc = 'Toggle Terminal' })
     end,
   },
 }

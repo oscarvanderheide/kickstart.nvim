@@ -5,7 +5,6 @@
 --║   - telescope-fzf-native                                                   ║
 --║   - telescope-ui-select                                                    ║
 --║   - telescope-cmdline                                                      ║
---║   - telescope-file-browser                                                 ║
 --║   - telescope-smart-open                                                   ║
 --╚════════════════════════════════════════════════════════════════════════════╝
 
@@ -34,10 +33,14 @@ return {
       -- Command as floating window
       'jonarrien/telescope-cmdline.nvim',
     },
+
     config = function()
       require('telescope').setup {
-        -- pickers = {}
-
+        pickers = {
+          find_files = {
+            find_command = { 'fd', '--type', 'f' }, -- use fd instead of the 'find' command, also hides hidden files by default
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -64,7 +67,7 @@ return {
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+      -- vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       -- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Commandline as a floating window
@@ -93,19 +96,12 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
       -- Shortcut for smart open
       vim.keymap.set('n', '<leader><leader>', function()
-        require('telescope').extensions.smart_open.smart_open()
-      end, { noremap = true, silent = true })
+        require('telescope').extensions.smart_open.smart_open { cwd_only = true }
+      end, { noremap = true, silent = true, desc = 'Smart Open' })
     end,
   },
 
-  -- Add telescope-based file browser as well
-  {
-    'nvim-telescope/telescope-file-browser.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
-    vim.keymap.set('n', '<space>fb', ':Telescope file_browser<CR>'),
-  },
-
-  -- Smart open
+  -- Smart open: frecency-based file opener
   {
     'danielfalk/smart-open.nvim',
     branch = '0.2.x',
