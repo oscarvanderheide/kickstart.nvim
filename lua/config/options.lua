@@ -22,7 +22,7 @@ vim.opt.splitbelow = true -- Horizontal splits open below
 vim.opt.inccommand = 'split' -- Preview substitutions live
 vim.opt.incsearch = true -- Incremental search
 -- vim.opt.hlsearch = true -- No highlighting after search
-vim.g.root_spec = { 'cwd' }
+-- vim.g.root_spec = { 'cwd' }
 vim.api.nvim_create_augroup('vimrc_incsearch_highlight', { clear = true })
 
 -- Enable search highlighting and cursorline on CmdlineEnter

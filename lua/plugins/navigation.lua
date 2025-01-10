@@ -48,7 +48,7 @@ return {
   - _q_/_<esc>_: Exit
         ]],
         config = {
-          foreign_keys = nil,
+          -- foreign_keys = nil,
           color = 'pink', -- "red" | "amaranth" | "teal" | "pink"
           invoke_on_body = true,
           hint = {
@@ -64,6 +64,10 @@ return {
           { 'h', tw.move_out, { desc = 'Move out', nowait = true } },
           -- Actions on nodes
           { 'v', tw.select_node, { desc = 'Select node', nowait = true } },
+          { 'V', tw.select_node_lines, { desc = 'Select node lines', nowait = true } },
+          { 'c', tw.comment_node, { desc = 'Comment node', nowait = true } },
+          { 'y', tw.yank_node, { desc = 'Yank node', nowait = true } },
+          { 'd', tw.delete_node, { desc = 'Delete node', nowait = true } },
           -- Exit keys
           { 'q', nil, { exit = true, nowait = true, desc = 'Exit' } },
           { '<esc>', nil, { exit = true, nowait = true, desc = 'Exit' } },

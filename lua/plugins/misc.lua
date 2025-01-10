@@ -11,7 +11,7 @@ return {
   },
 
   -- Inc-Rename: Rename a variable and all its references incrementally
-  { 'smjonas/inc-rename.nvim', event = 'VeryLazy', opts = {} },
+  -- { 'smjonas/inc-rename.nvim', event = 'VeryLazy', opts = {} },
 
   -- Autopairs: automatically adds closing ),] or } (disabled because it annoyed me)
   {
