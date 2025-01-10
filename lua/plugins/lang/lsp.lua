@@ -32,16 +32,16 @@ return {
     },
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      local lspconfig = require('lspconfig')
+      local lspconfig = require 'lspconfig'
 
       -- Enable the following language servers
       local servers = {
         -- clangd = {},
         -- gopls = {},
         -- PYTHON STUFF
-        -- pyright = {}, -- python lsp
+        pyright = {}, -- python lsp
         ruff = {}, -- python linter
-        mypy = {}, -- python type checker
+        -- mypy = {}, -- python type checker
         -- black = {}, -- python formatter
         -- isort = {}, -- python import organize
         -- taplo = {}, -- toml lsp

@@ -32,11 +32,7 @@ return {
           window = { border = 'rounded' },
         },
 
-        list = {
-          selection = function(ctx)
-            return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
-          end,
-        },
+        list = { selection = { auto_insert = true, preselect = true } },
 
         menu = {
           border = 'rounded',

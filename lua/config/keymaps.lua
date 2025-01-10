@@ -12,11 +12,11 @@ set('n', 'K', '{', { noremap = true, silent = true, desc = 'Move to previous par
 -- Keymaps for quickly moving up and down within a buffer (add smooth scrolling with cinnamon)
 set({ 'n', 'v' }, '<C-j>', function()
   -- require('cinnamon').scroll '15j'
-  vim.cmd 'normal! 15j'
+  vim.cmd 'normal! 6j'
 end, { silent = true })
 set({ 'n', 'v' }, '<C-k>', function()
   -- require('cinnamon').scroll '15k'
-  vim.cmd 'normal! 15k'
+  vim.cmd 'normal! 6k'
 end, { silent = true })
 
 -- Save file like in VSCode

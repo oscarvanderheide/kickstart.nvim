@@ -71,7 +71,7 @@ return {
       -- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Commandline as a floating window
-      vim.keymap.set('n', ':', '<cmd>Telescope cmdline<cr>', { desc = 'Cmdline' })
+      -- vim.keymap.set('n', ':', '<cmd>Telescope cmdline<cr>', { desc = 'Cmdline' })
       -- Slightly advanced example of overriding default behavior and theme
       -- vim.keymap.set('n', '<leader>/', function()
       --   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
