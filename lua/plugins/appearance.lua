@@ -214,4 +214,10 @@ return {
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
     },
   },
+  -- Visimatch: Highlight all instances of the selected word
+  {
+    'wurli/visimatch.nvim',
+    opts = {},
+  },
+  -- tpipeline: Integrate nvim statusline into tmux statusline
 }
