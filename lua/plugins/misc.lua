@@ -9,10 +9,6 @@ return {
       -- log_level = 'debug',
     },
   },
-
-  -- Inc-Rename: Rename a variable and all its references incrementally
-  -- { 'smjonas/inc-rename.nvim', event = 'VeryLazy', opts = {} },
-
   -- Autopairs: automatically adds closing ),] or } (disabled because it annoyed me)
   {
     -- 'windwp/nvim-autopairs',
@@ -53,8 +49,6 @@ return {
   --     { '<Leader>nf', ":lua require('neogen').generate()<CR>" },
   --   },
   -- },
-
-  -- Sleuth: Automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file
   {
     -- Automatically set tabstops and indents
     'tpope/vim-sleuth',
