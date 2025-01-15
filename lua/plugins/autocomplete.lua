@@ -11,7 +11,34 @@ return {
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
       -- See the full "keymap" documentation for information on defining your own keymap.
-
+      -- My super-TAB configuration
+      keymap = {
+        ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<C-e>'] = { 'hide', 'fallback' },
+        ['<C-CR>'] = { 'accept', 'fallback' },
+        ['<C-y>'] = { 'accept', 'fallback' },
+        -- ['<Tab>'] = {
+        --   function(cmp)
+        --     return cmp.select_next()
+        --   end,
+        --   'snippet_forward',
+        --   'fallback',
+        -- },
+        -- ['<S-Tab>'] = {
+        --   function(cmp)
+        --     return cmp.select_prev()
+        --   end,
+        --   'snippet_backward',
+        --   'fallback',
+        -- },
+        --
+        ['<Up>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<C-p>'] = { 'select_prev', 'fallback' },
+        ['<C-n>'] = { 'select_next', 'fallback' },
+        ['<C-up>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-down>'] = { 'scroll_documentation_down', 'fallback' },
+      },
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
         -- Useful for when your theme doesn't support blink.cmp
@@ -32,7 +59,9 @@ return {
           window = { border = 'rounded' },
         },
 
-        list = { selection = { auto_insert = true, preselect = true } },
+        list = {
+          selection = { auto_insert = true, preselect = true },
+        },
 
         menu = {
           border = 'rounded',
@@ -74,34 +103,6 @@ return {
             },
           },
         },
-      },
-      -- My super-TAB configuration
-      keymap = {
-        ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
-        ['<C-e>'] = { 'hide', 'fallback' },
-        ['<CR>'] = { 'accept', 'fallback' },
-
-        -- ['<Tab>'] = {
-        --   function(cmp)
-        --     return cmp.select_next()
-        --   end,
-        --   'snippet_forward',
-        --   'fallback',
-        -- },
-        -- ['<S-Tab>'] = {
-        --   function(cmp)
-        --     return cmp.select_prev()
-        --   end,
-        --   'snippet_backward',
-        --   'fallback',
-        -- },
-        --
-        ['<Up>'] = { 'select_prev', 'fallback' },
-        ['<Down>'] = { 'select_next', 'fallback' },
-        ['<C-p>'] = { 'select_prev', 'fallback' },
-        ['<C-n>'] = { 'select_next', 'fallback' },
-        ['<C-up>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-down>'] = { 'scroll_documentation_down', 'fallback' },
       },
       -- Experimental signature help support (no idea wtf this is)
       signature = {
