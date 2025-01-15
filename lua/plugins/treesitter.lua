@@ -6,7 +6,7 @@ return {
     -- [[ configure treesitter ]] see `:help nvim-treesitter`
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-context',
+      -- 'nvim-treesitter/nvim-treesitter-context', -- Shows e.g. function name on top for functions that extend beyond the screen
       'RRethy/nvim-treesitter-textsubjects',
       'RRethy/nvim-treesitter-endwise',
     },
@@ -47,10 +47,8 @@ return {
             ['if'] = '@function.inner',
             ['ac'] = '@class.outer',
             ['ic'] = '@class.inner',
-
             ['al'] = '@loop.outer',
             ['il'] = '@loop.inner',
-
             ['a='] = '@assignment.outer',
             ['i='] = '@assignment.inner',
             ['l='] = '@assignment.lhs',
@@ -93,10 +91,11 @@ return {
           -- Use if you want more granular movements
           -- Make it even more gradual by adding multiple queries and regex.
           goto_next = {
-            [']d'] = '@conditional.outer',
+            [']d'] = { query = { '@function.outer', '@class.outer' } },
+            -- [']d'] = '@conditional.outer',
           },
           goto_previous = {
-            ['[d'] = '@conditional.outer',
+            ['[d'] = { query = { '@function.outer', '@class.outer' } },
           },
           -- Move between code cells
         },
