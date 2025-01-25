@@ -80,6 +80,7 @@ vim.keymap.set('n', '<leader>rn', function()
   return ':IncRename ' .. vim.fn.expand '<cword>'
 end, { expr = true, desc = 'Re[N]ame Incremental' })
 
--- Toggle Copilot Chat with backslash [TODO: Should be a plugin keymap]
-set('v', '<leader>c', '<cmd>CopilotChatToggle<CR>', { desc = '[C]opilot Chat' })
-set('n', '<leader>c', '<cmd>CopilotChatToggle<CR>', { desc = '[C]opilot Chat' })
+
+set({'n','v'}, '<leader>cc', ':CopilotChat<CR>', {noremap = true, silent = true})
+set({'n','v'}, '<leader>ce', ':CopilotChatExplain<CR>', {noremap = true, silent = true})
+set({'n','v'}, '<leader>cr', ':CopilotChatReset<CR>', {noremap = true, silent = true})

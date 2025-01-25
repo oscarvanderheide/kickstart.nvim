@@ -1,25 +1,25 @@
 return {
 
   -- Nord: Colortheme
-  {
-    'comfysage/evergarden',
-    priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
-    opts = {
-      transparent_background = true,
-      variant = 'medium', -- 'hard'|'medium'|'soft'
-      overrides = {}, -- add custom overrides
-    },
-    init = function()
-      vim.cmd.colorscheme 'evergarden'
-    end,
-  },
   -- {
-  --   'gbprod/nord.nvim',
-  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   'comfysage/evergarden',
+  --   priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
+  --   opts = {
+  --     transparent_background = true,
+  --     variant = 'medium', -- 'hard'|'medium'|'soft'
+  --     overrides = {}, -- add custom overrides
+  --   },
   --   init = function()
-  --     vim.cmd.colorscheme 'nord'
+  --     vim.cmd.colorscheme 'evergarden'
   --   end,
   -- },
+  {
+    'gbprod/nord.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    init = function()
+      vim.cmd.colorscheme 'nord'
+    end,
+  },
 
   -- Lualine: Customize the statusline
   {
